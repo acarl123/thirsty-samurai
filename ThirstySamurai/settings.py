@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # 3rd party
     'localflavor',
+    'phone_field',
 
     # ours
     'api',

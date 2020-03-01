@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from localflavor.us.models import PhoneNumberField, USZipCodeField, USStateField
+from localflavor.us.models import USZipCodeField, USStateField
+from phone_field import PhoneField
 
 from api.constants import GENDER_CHOICES, PHONE_TYPE_CHOICES
 
@@ -14,7 +15,7 @@ class Profile(models.Model):
     city = models.CharField(max_length=50, null=True, blank=True)
     state = USStateField(null=True, blank=True)
     zipcode = USZipCodeField(null=True, blank=True)
-    phone_number = PhoneNumberField(null=True, blank=True)
+    phone_number = PhoneField(null=True, blank=True)
     phone_type = models.CharField(max_length=10, choices=PHONE_TYPE_CHOICES, default='MOBILE')
     birth_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='MALE')
@@ -41,7 +42,7 @@ class LegacyUser(models.Model):
     city = models.CharField(max_length=50, null=True, blank=True)
     state = USStateField(null=True, blank=True)
     zipcode = USZipCodeField(null=True, blank=True)
-    phone_number = PhoneNumberField(null=True, blank=True)
+    phone_number = PhoneField(null=True, blank=True)
     phone_type = models.CharField(max_length=10, choices=PHONE_TYPE_CHOICES, default='MOBILE')
     birth_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='MALE')
