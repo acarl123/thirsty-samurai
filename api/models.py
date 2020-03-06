@@ -57,3 +57,31 @@ class InterestedUser(models.Model):
     email = models.EmailField(max_length=254)
     message = models.TextField()
     newsletter = models.BooleanField(default=True)
+
+
+class Event(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    start_date = models.DateTimeField(auto_now=False, auto_now_add=False)
+    end_date = models.DateTimeField(auto_now=False, auto_now_add=False)
+    price = models.IntegerField()
+    capacity = models.IntegerField()
+    venue_name = models.CharField(max_length=100)
+    venue_address = models.CharField(max_length=150)
+    venue_link = models.URLField(max_length=200)
+    venue_map_link = models.URLField(max_length=200)
+    ticket_link = models.URLField(max_length=200)
+    image = models.ImageField(upload_to='uploads/images', height_field=None, width_field=None, max_length=None)
+
+    tags = models.ManyToManyField("Tag", verbose_name="Tags")
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)
+
+    
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField()
+    description = models.CharField(max_length=100)
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=50)
