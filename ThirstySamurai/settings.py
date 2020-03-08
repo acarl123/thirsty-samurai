@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # ours
     'api',
+    'frontend',
 ]
 
 MIDDLEWARE = [

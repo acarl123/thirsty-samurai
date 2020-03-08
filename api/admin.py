@@ -2,10 +2,12 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from api.models import Profile, LegacyUser, InterestedUser
+from api.models import Profile, LegacyUser, InterestedUser, Tag, Event, Category
 
 admin.site.register(LegacyUser)
 admin.site.register(InterestedUser)
+admin.site.register(Tag)
+admin.site.register(Category)
 
 class ProfileInline(admin.StackedInline):
     model = Profile
@@ -24,3 +26,19 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+
+class TagsInLine(admin.StackedInline):
+    model = Event.tags.through
+    verbose_name = u"Tag"
+    verbose_name_plural = u"Tags"
+
+class CategoryInLine(admin.StackedInline):
+    model = Category
+    verbose_name = u"Category"
+    verbose_name_plural = u"Categories"
+
+class CustomEventAdmin(admin.ModelAdmin):
+    model = Event
+    inlines = (TagsInLine,)
+
+admin.site.register(Event, CustomEventAdmin)
