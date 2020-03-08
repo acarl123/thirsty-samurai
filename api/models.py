@@ -79,7 +79,6 @@ class Event(models.Model):
     
 class Tag(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.SlugField()
     description = models.CharField(max_length=100)
 
 
